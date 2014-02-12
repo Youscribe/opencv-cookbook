@@ -28,7 +28,7 @@ when "windows"
     action :upgrade if node['opencv']['upgrade']
   end
 else
-  package "libopencv-core2.4" do
+  package "libopencv-core#{node['opencv']['package']['version']}" do
     action :upgrade if node['opencv']['upgrade']
   end
 end

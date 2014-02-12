@@ -20,6 +20,12 @@
 
 include_recipe "build-essential"
 
+package "unzip"
+package "cmake"
+package "python-numpy"
+
+src_filepath  = "#{Chef::Config['file_cache_path'] || '/tmp'}/#{::File.basename(node['opencv']['source']['url'])}"
+
 remote_file node['opencv']['source']['url'] do
   path src_filepath
   checksum node['opencv']['source']['checksum']
@@ -27,18 +33,16 @@ remote_file node['opencv']['source']['url'] do
   backup false
 end
 
-src_filepath  = "#{Chef::Config['file_cache_path'] || '/tmp'}/#{::File.basename(node['opencv']['source']['url'])}"
-
 bash "compile_opencv_source" do
   cwd ::File.dirname(src_filepath)
   code <<-EOH
-    unzip #{::File.basename(src_filepath)} -d .
+    unzip #{::File.basename(src_filepath)} -d . &&
     cd #{::File.basename(src_filepath, ::File.extname(src_filepath))} &&
 	mkdir release &&
 	cd release &&
-	sudo cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. &&
-	sudo make -j &&
-	sudo make install
+	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. &&
+	make &&
+	make install
   EOH
 
   not_if do 
