@@ -1,9 +1,9 @@
 #
-# Cookbook Name:: optipng
+# Cookbook Name:: opencv
 # Recipe:: install
 # Author:: Guilhem Lettron <guilhem.lettron@youscribe.com>
 #
-# Copyright 2012, Societe Publica.
+# Copyright 2014, Societe YouScribe.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
