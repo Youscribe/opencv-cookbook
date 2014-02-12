@@ -79,7 +79,7 @@ Vagrant.configure("2") do |config|
 
     chef.run_list = [
         "recipe[opencv::default]",
-		"recipe[opencv::install_source]"
+        "recipe[opencv::install_source]"
     ]
   end
 end
