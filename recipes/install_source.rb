@@ -42,7 +42,8 @@ bash "compile_opencv_source" do
 	cd release &&
 	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. &&
 	make &&
-	make install
+	make install &&
+	make clean
   EOH
 
   not_if do 
