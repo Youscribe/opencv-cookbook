@@ -23,6 +23,7 @@ include_recipe "build-essential"
 package "unzip"
 package "cmake"
 package "python-numpy"
+package "ant"
 
 src_filepath  = "#{Chef::Config['file_cache_path'] || '/tmp'}/#{::File.basename(node['opencv']['source']['url'])}"
 
