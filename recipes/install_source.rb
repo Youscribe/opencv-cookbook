@@ -19,10 +19,24 @@
 #
 
 include_recipe "build-essential"
-
+ 
 package "unzip"
-package "cmake"
-package "python-numpy"
+ 
+if platform_family?("rhel")
+  include_recipe "yum::epel"
+  cmake_pkg = "cmake28"
+else
+  cmake_pkg = "cmake"
+end
+package cmake_pkg
+ 
+if platform_family?("rhel")
+  include_recipe "python"
+  python_pip "numpy"
+else
+  package "python-numpy"
+end
+ 
 package "ant"
 
 src_filepath  = "#{Chef::Config['file_cache_path'] || '/tmp'}/#{::File.basename(node['opencv']['source']['url'])}"
@@ -41,7 +55,7 @@ bash "compile_opencv_source" do
     cd #{::File.basename(src_filepath, ::File.extname(src_filepath))} &&
 	mkdir release &&
 	cd release &&
-	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. &&
+	#{cmake_pkg} -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. &&
 	make &&
 	make install &&
 	make clean
