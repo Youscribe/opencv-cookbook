@@ -27,6 +27,12 @@ when "windows"
   chocolatey "opencv" do
     action :upgrade if node['opencv']['upgrade']
   end
+when "rhel"
+  %w(opencv opencv-devel).each do |pkg|
+    package pkg do
+      action :upgrade if node['opencv']['upgrade']
+    end
+  end
 else
   package "libopencv-core#{node['opencv']['package']['version']}" do
     action :upgrade if node['opencv']['upgrade']
