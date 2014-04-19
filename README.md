@@ -10,11 +10,14 @@ Requirements
 
 * Ubuntu
 * Windows
+* CentOS
 
 ## Coobooks:
 
 * apt
 * chocolatey
+* yum
+* python
 
 Attributes
 ==========
