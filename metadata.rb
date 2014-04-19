@@ -9,8 +9,11 @@ version          "0.0.4"
 
 depends          "apt"
 depends          "build-essential"
+depends          "yum"
+depends          "python"
 
 recommends       "chocolatey"
 
+supports         "centos"
 supports         "ubuntu"
 supports         "windows"
