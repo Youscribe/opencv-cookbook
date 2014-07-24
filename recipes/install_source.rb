@@ -23,7 +23,7 @@ include_recipe "build-essential"
 package "unzip"
  
 if platform_family?("rhel")
-  include_recipe "yum::epel"
+  include_recipe "yum-epel"
   cmake_pkg = "cmake28"
 else
   cmake_pkg = "cmake"
