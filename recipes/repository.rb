@@ -19,23 +19,23 @@
 #
 
 case node['opencv']['repository']
-when "ppa"
+when 'ppa'
   case node['opencv']['repository_ppa']
-  when "stable", "daily", "backports"
-    apt_repository "opencv" do
+  when 'stable', 'daily', 'backports'
+    apt_repository 'opencv' do
       uri "http://ppa.launchpad.net/opencv/#{node['opencv']['repository_ppa']}/ubuntu"
       distribution node['lsb']['codename']
-      components ["main"]
-      keyserver "keyserver.ubuntu.com"
-      key "D117DE3E"
+      components ['main']
+      keyserver 'keyserver.ubuntu.com'
+      key 'D117DE3E'
     end
-  when "gijzelaar"
-    apt_repository "opencv" do
-      uri "http://ppa.launchpad.net/gijzelaar/opencv2.4/ubuntu"
+  when 'gijzelaar'
+    apt_repository 'opencv' do
+      uri 'http://ppa.launchpad.net/gijzelaar/opencv2.4/ubuntu'
       distribution node['lsb']['codename']
-      components ["main"]
-      keyserver "keyserver.ubuntu.com"
-      key "087475A0"
+      components ['main']
+      keyserver 'keyserver.ubuntu.com'
+      key '087475A0'
     end
   end
 end

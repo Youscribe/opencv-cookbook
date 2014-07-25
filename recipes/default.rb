@@ -18,4 +18,4 @@
 # limitations under the License.
 #
 
-include_recipe "opencv::install"
+include_recipe 'opencv::install'

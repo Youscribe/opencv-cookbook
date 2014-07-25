@@ -18,16 +18,16 @@
 # limitations under the License.
 #
 
-include_recipe "opencv::repository" if node['opencv']['repository']
+include_recipe 'opencv::repository' if node['opencv']['repository']
 
-case node["platform_family"]
-when "windows"
-  include_recipe "chocolatey"
+case node['platform_family']
+when 'windows'
+  include_recipe 'chocolatey'
 
-  chocolatey "opencv" do
+  chocolatey 'opencv' do
     action :upgrade if node['opencv']['upgrade']
   end
-when "rhel"
+when 'rhel'
   %w(opencv opencv-devel).each do |pkg|
     package pkg do
       action :upgrade if node['opencv']['upgrade']

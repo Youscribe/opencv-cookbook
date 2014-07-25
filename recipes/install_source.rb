@@ -18,26 +18,26 @@
 # limitations under the License.
 #
 
-include_recipe "build-essential"
- 
-package "unzip"
- 
-if platform_family?("rhel")
-  include_recipe "yum-epel"
-  cmake_pkg = "cmake28"
+include_recipe 'build-essential'
+
+package 'unzip'
+
+if platform_family?('rhel')
+  include_recipe 'yum-epel'
+  cmake_pkg = 'cmake28'
 else
-  cmake_pkg = "cmake"
+  cmake_pkg = 'cmake'
 end
 package cmake_pkg
- 
-if platform_family?("rhel")
-  include_recipe "python"
-  python_pip "numpy"
+
+if platform_family?('rhel')
+  include_recipe 'python'
+  python_pip 'numpy'
 else
-  package "python-numpy"
+  package 'python-numpy'
 end
- 
-package "ant"
+
+package 'ant'
 
 src_filepath  = "#{Chef::Config['file_cache_path'] || '/tmp'}/#{::File.basename(node['opencv']['source']['url'])}"
 
@@ -48,9 +48,9 @@ remote_file node['opencv']['source']['url'] do
   backup false
 end
 
-cmake_define = node['opencv']['source']['cmake_define'].map{|key, value| "-D #{key}=#{value}"}.join(" ")
+cmake_define = node['opencv']['source']['cmake_define'].map { |key, value| "-D #{key}=#{value}" }.join(' ')
 
-bash "compile_opencv_source" do
+bash 'compile_opencv_source' do
   cwd ::File.dirname(src_filepath)
   code <<-EOH
     unzip #{::File.basename(src_filepath)} -d . &&
@@ -63,7 +63,7 @@ bash "compile_opencv_source" do
 	make clean
   EOH
 
-  not_if do 
+  not_if do
     node['opencv']['source']['force_recompile'] == false && ::File.directory?(::File.dirname(src_filepath) + '/' + ::File.basename(src_filepath, ::File.extname(src_filepath)))
   end
 end

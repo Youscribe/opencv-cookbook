@@ -1,1 +1,1 @@
-default['opencv']['package']['version'] = "2.3"
+default['opencv']['package']['version'] = '2.3'
