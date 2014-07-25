@@ -9,7 +9,6 @@ version          "0.0.4"
 
 depends          "apt"
 depends          "build-essential"
-depends          "yum", "~> 3.0"
 depends          "yum-epel"
 depends          "python"
 
