@@ -11,8 +11,7 @@ depends          "apt"
 depends          "build-essential"
 depends          "yum-epel"
 depends          "python"
-
-recommends       "chocolatey"
+depends          "chocolatey"
 
 supports         "centos"
 supports         "ubuntu"
