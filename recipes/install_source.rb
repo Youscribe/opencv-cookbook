@@ -55,12 +55,12 @@ bash 'compile_opencv_source' do
   code <<-EOH
     unzip #{::File.basename(src_filepath)} -d . &&
     cd #{::File.basename(src_filepath, ::File.extname(src_filepath))} &&
-	mkdir release &&
-	cd release &&
-	#{cmake_pkg} #{cmake_define} .. &&
-	make &&
-	make install &&
-	make clean
+    mkdir release &&
+    cd release &&
+    #{cmake_pkg} #{cmake_define} .. &&
+    make &&
+    make install &&
+    make clean
   EOH
 
   not_if do
