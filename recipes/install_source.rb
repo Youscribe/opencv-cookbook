@@ -48,6 +48,8 @@ remote_file node['opencv']['source']['url'] do
   backup false
 end
 
+cmake_define = node['opencv']['source']['cmake_define'].map{|key, value| "-D #{key}=#{value}"}.join(" ")
+
 bash "compile_opencv_source" do
   cwd ::File.dirname(src_filepath)
   code <<-EOH
@@ -55,7 +57,7 @@ bash "compile_opencv_source" do
     cd #{::File.basename(src_filepath, ::File.extname(src_filepath))} &&
 	mkdir release &&
 	cd release &&
-	#{cmake_pkg} -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. &&
+	#{cmake_pkg} #{cmake_define} .. &&
 	make &&
 	make install &&
 	make clean
