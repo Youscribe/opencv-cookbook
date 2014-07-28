@@ -16,8 +16,7 @@ namespace :style do
     desc 'Run Chef style checks'
     FoodCritic::Rake::LintTask.new(:chef) do |t|
       t.options = {
-        fail_tags: ['any'],
-        tags: ['~FC003']
+        fail_tags: ['any']
       }
     end
   rescue LoadError
@@ -38,6 +37,11 @@ namespace :integration do
   rescue LoadError
     puts '>>>>> Kitchen gem not loaded, omitting tasks' unless ENV['CI']
   end
+end
+
+namespace :maintain do
+  require 'stove/rake_task'
+  Stove::RakeTask.new
 end
 
 desc 'Run all tests on Travis'
