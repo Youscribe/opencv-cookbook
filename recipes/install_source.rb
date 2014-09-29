@@ -32,6 +32,7 @@ package cmake_pkg
 
 if platform_family?('rhel')
   include_recipe 'python'
+  python_pip 'setuptools'
   python_pip 'numpy'
 else
   package 'python-numpy'
