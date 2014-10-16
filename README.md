@@ -35,7 +35,7 @@ Launch the "install" recipe.
 Usage
 =====
 
-Include `recipe[opencv]` on systems where you want to install optipng.
+Include `recipe[opencv]` on systems where you want to install opencv.
 
 License and Author
 ==================
