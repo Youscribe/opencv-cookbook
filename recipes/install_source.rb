@@ -22,7 +22,7 @@ include_recipe 'build-essential'
 
 package 'unzip'
 
-if platform_family?('rhel')
+if platform_family?('rhel') && !(platform?('amazon'))
   include_recipe 'yum-epel'
   cmake_pkg = 'cmake28'
 else
@@ -32,6 +32,7 @@ package cmake_pkg
 
 if platform_family?('rhel')
   include_recipe 'python'
+  python_pip 'setuptools'
   python_pip 'numpy'
 else
   package 'python-numpy'
